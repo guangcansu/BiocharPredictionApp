@@ -5,12 +5,37 @@ Six ML models (GBM, RF, SVR, ANN, DNN, MARS) were benchmarked; **Gradient Boosti
 
 ---
 
+## Repository Structure
+
+```
+BiocharPredictionApp/
+│
+├── data/
+│   └── DATAT.xlsx          # Experimental dataset
+│
+├── src/
+│   └── main.py             # Data loading, preprocessing & GBM model training
+│
+├── app/
+│   └── biochar_gui.py      # Tkinter GUI — imports trained models from src/
+│
+├── models/                 # (reserved) saved model artifacts
+├── results/                # (reserved) evaluation outputs / figures
+│
+├── requirements.txt
+├── README.md
+├── LICENSE
+└── .gitignore
+```
+
+---
+
 ## Overview
 
 | Item | Detail |
 |------|--------|
 | **Task** | Multi-output regression |
-| **Inputs** | 11 biomass/process features |
+| **Inputs** | 11 biomass / process features |
 | **Outputs** | 9 biochar properties |
 | **Best model** | GBM (`n_estimators=100`, `lr=0.5`, `max_depth=5`) |
 | **GUI** | Python Tkinter |
@@ -37,20 +62,6 @@ C%, H%, O%, N%, FC%, VM%, Ash%, **Yield** (wt%), **HHV** (MJ/kg) of the resultin
 
 ---
 
-## Repository Structure
-
-```
-BiocharPredictionApp/
-├── main.py             # Model training + Tkinter GUI
-├── requirements.txt    # Python dependencies
-├── data/
-│   └── original_data.xlsx   # Experimental dataset
-├── LICENSE
-└── README.md
-```
-
----
-
 ## Installation
 
 ```bash
@@ -60,13 +71,13 @@ cd BiocharPredictionApp
 
 # 2. (Optional) Create a virtual environment
 python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+source venv/bin/activate      # Windows: venv\Scripts\activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
 ```
 
-> **Python 3.8+** required. Tkinter is included with most Python distributions.  
+> **Python 3.8+** required. Tkinter ships with most Python distributions.  
 > On Linux you may need: `sudo apt-get install python3-tk`
 
 ---
@@ -74,18 +85,22 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-python main.py
+python app/biochar_gui.py
 ```
 
-1. The model trains automatically on startup (a few seconds).
-2. Enter your biomass/process parameters in the GUI fields.
+1. Models train automatically on startup (a few seconds).
+2. Enter your 11 biomass / process parameters in the GUI.
 3. Click **Predict** — the 9 biochar properties appear instantly.
+
+To run model training and print metrics without the GUI:
+
+```bash
+python src/main.py
+```
 
 ---
 
 ## Model Comparison
-
-Six models were evaluated on the same dataset:
 
 | Model | Description |
 |-------|-------------|
